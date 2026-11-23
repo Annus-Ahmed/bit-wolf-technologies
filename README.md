@@ -60,4 +60,4 @@ Import this repository in Vercel, select the Next.js preset, and leave build/out
 - `src/app`: pages, metadata, and server-side enquiry endpoint.
 - `src/lib`: shared validation and rate limiting.
 
-Keep real environment files out of source control. This is a local Vercel-ready implementation; no live deployment has been created.
+Keep real environment files out of source control. The repository is connected to Vercel. Pushes to main trigger automatic deployments. Production URL: https://bit-wolf-technologies-anaxs-projects.vercel.app. Configure the contact provider variables before relying on email enquiries.

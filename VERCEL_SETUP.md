@@ -1,5 +1,13 @@
 # Vercel setup
 
+Repository: https://github.com/Annus-Ahmed/bit-wolf-technologies
+
+Project: https://vercel.com/anaxs-projects/bit-wolf-technologies
+
+Production URL: https://bit-wolf-technologies-anaxs-projects.vercel.app
+
+Automatic deployments are connected to the main branch. NEXT_PUBLIC_SITE_URL is configured for Production. Add the five contact/provider variables below in the project settings to activate enquiry delivery.
+
 Use the Next.js preset, this folder as the project root, `npm run build`, and the default output directory. Use the team's commercial Vercel plan. GitHub can be connected later for automatic deployments; a first deployment can be uploaded directly.
 
 ## Production environment variables
