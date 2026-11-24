@@ -53,10 +53,10 @@ Import this repository in Vercel, select the Next.js preset, and leave build/out
 
 ## Assets and structure
 
-`public/images/bit-wolf-original.png` is the exact supplied logo. The wolf symbol, wordmark, and favicon are crops of this image with unchanged artwork. The source remains untouched. Compact derivatives remove only the dark background to sit cleanly on the site. No replacement logo or AI artwork is used. The hero devices are responsive HTML/CSS illustrations with readable interface content, not client project claims.
+`public/images/bit-wolf-original.png` is the exact supplied logo. The wolf symbol, wordmark, and favicon are crops of this image with unchanged artwork. The source remains untouched. Compact derivatives remove only the dark background to sit cleanly on the site. No replacement logo or AI artwork is used. The hero features an original canvas-rendered metallic ribbon. Interactive service previews are clearly labeled interface concepts, not client projects.
 
 - `src/data/site.ts`: company contacts, services, industry descriptions, and process.
-- `src/components`: shared navigation, footer, sections, device artwork, forms, and portfolio.
+- `src/components`: shared navigation, footer, sections, motion preferences, canvas artwork, service explorer, forms, and portfolio.
 - `src/app`: pages, metadata, and server-side enquiry endpoint.
 - `src/lib`: shared validation and rate limiting.
 

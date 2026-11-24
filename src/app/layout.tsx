@@ -1,7 +1,21 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@/components/layout";
 import { getSiteUrl } from "@/lib/site-url";
+import localFont from "next/font/local";
+import { MotionProvider } from "@/components/motion";
 import "./globals.css";
+const manrope = localFont({
+  src: "../../public/fonts/manrope-variable.ttf",
+  weight: "200 800",
+  variable: "--font-body",
+  display: "swap",
+});
+const spaceGrotesk = localFont({
+  src: "../../public/fonts/space-grotesk-variable.ttf",
+  weight: "300 700",
+  variable: "--font-display",
+  display: "swap",
+});
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
@@ -49,13 +63,15 @@ export default function RootLayout({
   };
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>
+      <body className={`${manrope.variable} ${spaceGrotesk.variable}`}>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </MotionProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

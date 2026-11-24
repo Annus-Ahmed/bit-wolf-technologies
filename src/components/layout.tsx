@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, Phone, MapPin } from "lucide-react";
 import { company, services } from "@/data/site";
+import { Reveal, ScrollProgress } from "./motion";
 const links = [
   ["Home", "/"],
   ["About", "/about"],
@@ -67,6 +68,7 @@ export function Header() {
   }, [open]);
   return (
     <header className="header">
+      <ScrollProgress />
       <div className="container nav">
         <Brand />
         <nav aria-label="Main navigation" className="desktop-nav">
@@ -85,7 +87,7 @@ export function Header() {
           ))}
         </nav>
         <Link className="button nav-cta" href="/contact">
-          Get a Free Consultation
+          Start a Project
         </Link>
         <button
           ref={buttonRef}
@@ -114,7 +116,7 @@ export function Header() {
               href="/contact"
               onClick={() => setOpen(false)}
             >
-              Get a Free Consultation
+              Start a Project
             </Link>
           </nav>
         </div>
@@ -127,17 +129,23 @@ export function Footer() {
     <>
       <section className="closing">
         <div className="container closing-inner">
-          <div>
-            <span className="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+          <Reveal>
+            <span className="eyebrow">SOMETHING ON YOUR MIND?</span>
             <h2>
-              Have an idea? <span>Let’s build it.</span>
+              Let’s make
+              <br />
+              <span>it happen.</span>
             </h2>
-            <p>
-              Turn your business challenge into your next digital opportunity.
-            </p>
-          </div>
-          <Link href="/contact" className="button">
-            Start a Project
+            <p>A new idea. A better way. Your next big thing.</p>
+          </Reveal>
+          <Link href="/contact" className="closing-cta">
+            <span>
+              Start a<br />
+              conversation
+            </span>
+            <span className="closing-plus" aria-hidden="true">
+              +
+            </span>
           </Link>
         </div>
       </section>
@@ -200,6 +208,9 @@ export function Footer() {
             <Link href="/privacy-policy">Privacy Policy</Link>
             <Link href="/terms">Terms & Conditions</Link>
           </div>
+        </div>
+        <div className="footer-wordmark container" aria-hidden="true">
+          BIT-WOLF<span>TECHNOLOGIES</span>
         </div>
       </footer>
       <a

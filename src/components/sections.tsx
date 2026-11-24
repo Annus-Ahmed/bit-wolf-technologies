@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { services, industries, process } from "@/data/site";
 import { Icon } from "./icon";
+import { Reveal } from "./motion";
 export function SectionHeading({
   eyebrow,
   title,
@@ -13,7 +14,7 @@ export function SectionHeading({
   link?: [string, string];
 }) {
   return (
-    <div className="section-heading">
+    <Reveal className="section-heading">
       <div>
         <span className="eyebrow">{eyebrow}</span>
         <h2>{title}</h2>
@@ -24,7 +25,7 @@ export function SectionHeading({
           {link[0]} <span aria-hidden="true">↗</span>
         </Link>
       )}
-    </div>
+    </Reveal>
   );
 }
 export function ServiceCards() {
