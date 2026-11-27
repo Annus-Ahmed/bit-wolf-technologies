@@ -8,7 +8,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { OrbitalArt } from "@/components/orbital-art";
+import { NetworkBackground } from "@/components/network-background";
 import { MotionToggle, Reveal } from "@/components/motion";
 import { ServiceExplorer } from "@/components/service-explorer";
 import { IndustryCards, SectionHeading } from "@/components/sections";
@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <>
       <section className="hero editorial-hero">
-        <div className="hero-grain" aria-hidden="true" />
+        <NetworkBackground />
         <div className="container editorial-hero-inner">
           <Reveal className="editorial-hero-copy">
             <span className="eyebrow hero-eyebrow">
@@ -67,19 +67,6 @@ export default function Home() {
               </Link>
             </div>
           </Reveal>
-          <div className="hero-sculpture">
-            <OrbitalArt />
-            <div className="sculpture-caption">
-              <span className="caption-cross" aria-hidden="true">
-                +
-              </span>
-              <span>
-                GOOD IDEAS HAVE
-                <br />
-                NO LIMITS.
-              </span>
-            </div>
-          </div>
         </div>
         <div className="container editorial-hero-bottom">
           <a href="#intro" className="scroll-cue">
@@ -165,12 +152,13 @@ export default function Home() {
             </div>
             <Image
               src="/images/wolf-symbol-transparent.png"
-              width={175}
-              height={106}
+              width={620}
+              height={374}
+              sizes="(max-width: 640px) 65vw, (max-width: 950px) 32vw, 370px"
               alt=""
             />
             <span className="perspective-caption">
-              THINK FORWARD. BUILD WITH PURPOSE.
+              Engineering what’s next.
             </span>
           </div>
           <Reveal className="perspective-copy">

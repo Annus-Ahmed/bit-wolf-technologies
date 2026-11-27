@@ -1,6 +1,6 @@
 export const company = {
   name: "BIT-WOLF Technologies",
-  phone: "03170561010",
+  phone: "+92 317 0561010",
   tel: "+923170561010",
   whatsapp:
     "https://wa.me/923170561010?text=Hello%20BIT-WOLF%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20software%20development%20project.",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections";
+import { company } from "@/data/site";
 export const metadata: Metadata = { title: "Terms & Conditions" };
 export default function Terms() {
   return (
@@ -49,7 +50,7 @@ export default function Terms() {
         </p>
         <h2>Questions and legal review</h2>
         <p>
-          For questions, call 03170561010. The company and its legal adviser
+          For questions, call {company.phone}. The company and its legal adviser
           must confirm applicable law, dispute arrangements, liability
           provisions, and the approved business details before publication.
         </p>

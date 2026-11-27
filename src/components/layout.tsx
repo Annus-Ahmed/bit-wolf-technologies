@@ -11,7 +11,7 @@ const links = [
   ["About", "/about"],
   ["Services", "/services"],
   ["Portfolio", "/portfolio"],
-  ["Industries", "/industries"],
+  ["Commercials", "/industries"],
   ["Contact", "/contact"],
 ];
 export function Brand() {
@@ -210,7 +210,14 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-wordmark container" aria-hidden="true">
-          BIT-WOLF<span>TECHNOLOGIES</span>
+          <div className="footer-wordmark-text">
+            <span className="footer-wordmark-name">
+              BIT<span>-</span>WOLF
+            </span>
+            <span className="footer-wordmark-subtitle">
+              <span>TECHNOLOGIES</span>
+            </span>
+          </div>
         </div>
       </footer>
       <a

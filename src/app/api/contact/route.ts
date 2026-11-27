@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { contactSchema } from "@/lib/contact";
 import { allowContact } from "@/lib/rate-limit";
-import { services } from "@/data/site";
+import { company, services } from "@/data/site";
 export const runtime = "nodejs";
 const error = (message: string, status: number) =>
   NextResponse.json({ error: message }, { status });
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
   const from = process.env.EMAIL_FROM;
   if (!key || !to || !from)
     return error(
-      "Email enquiries are being set up. Please call 03170561010 or contact us on WhatsApp.",
+      `Email enquiries are being set up. Please call ${company.phone} or contact us on WhatsApp.`,
       503,
     );
   try {

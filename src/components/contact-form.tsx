@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { services } from "@/data/site";
 import { contactSchema } from "@/lib/contact";
+import { formatContactPhone, phoneCountries } from "@/lib/phone";
 export function ContactForm({ initialService }: { initialService: string }) {
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">(
     "idle",
@@ -15,9 +16,21 @@ export function ContactForm({ initialService }: { initialService: string }) {
     if (pending.current) return;
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form));
+    const country =
+      phoneCountries.find((option) => option.country === data.phoneCountry)
+        ?.country || "PK";
+    const phone = formatContactPhone(String(data.phone || ""), country);
+    if (phone === null) {
+      setState("error");
+      setMessage(
+        "Please enter a valid phone number for the selected country code.",
+      );
+      return;
+    }
     if (!requestId.current) requestId.current = crypto.randomUUID();
     const parsed = contactSchema.safeParse({
       ...data,
+      phone,
       consent: data.consent === "on",
       requestId: requestId.current,
     });
@@ -91,16 +104,32 @@ export function ContactForm({ initialService }: { initialService: string }) {
             placeholder="you@company.com"
           />
         </label>
-        <label className="form-field">
-          Phone / WhatsApp
-          <input
-            name="phone"
-            autoComplete="tel"
-            type="tel"
-            maxLength={40}
-            placeholder="+92 ..."
-          />
-        </label>
+        <div className="form-field">
+          <label htmlFor="contact-phone">Phone / WhatsApp</label>
+          <div className="phone-input-group">
+            <select
+              name="phoneCountry"
+              aria-label="Country calling code"
+              autoComplete="tel-country-code"
+              defaultValue="PK"
+            >
+              {phoneCountries.map(({ country, name, callingCode }) => (
+                <option key={country} value={country}>
+                  {name} (+{callingCode})
+                </option>
+              ))}
+            </select>
+            <input
+              id="contact-phone"
+              name="phone"
+              autoComplete="tel-national"
+              type="tel"
+              inputMode="tel"
+              maxLength={40}
+              placeholder="Phone number"
+            />
+          </div>
+        </div>
         <label className="form-field">
           Service required *
           <select name="service" required defaultValue={initialService}>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections";
+import { company } from "@/data/site";
 export const metadata: Metadata = { title: "Privacy Policy" };
 export default function Privacy() {
   return (
@@ -43,7 +44,7 @@ export default function Privacy() {
           Enquiry information should be retained only as long as needed for the
           enquiry, an agreed project, or applicable record-keeping obligations.
           The company must confirm its retention schedule before launch. You may
-          request access, correction, or deletion by calling 03170561010 or
+          request access, correction, or deletion by calling {company.phone} or
           contacting the team on WhatsApp.
         </p>
         <h2>Cookies and external links</h2>
