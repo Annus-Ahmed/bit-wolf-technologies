@@ -8,7 +8,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { NetworkBackground } from "@/components/network-background";
+import { WorldNetworkBackground } from "@/components/world-network-background";
 import { MotionToggle, Reveal } from "@/components/motion";
 import { ServiceExplorer } from "@/components/service-explorer";
 import { IndustryCards, SectionHeading } from "@/components/sections";
@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <>
       <section className="hero editorial-hero">
-        <NetworkBackground />
+        <WorldNetworkBackground />
         <div className="container editorial-hero-inner">
           <Reveal className="editorial-hero-copy">
             <span className="eyebrow hero-eyebrow">
@@ -158,7 +158,7 @@ export default function Home() {
               alt=""
             />
             <span className="perspective-caption">
-              Engineering what’s next.
+              ENGINEERING THE DIGITAL FUTURE.
             </span>
           </div>
           <Reveal className="perspective-copy">
@@ -187,8 +187,8 @@ export default function Home() {
         <SectionHeading
           eyebrow="BUILT AROUND YOUR WORLD"
           title="Different businesses. Shared possibilities."
-          description="Digital solutions shaped around your industry, your people, and your next chapter."
-          link={["Explore industries", "/industries"]}
+          description="Digital solutions shaped around your commercials, your people, and your next chapter."
+          link={["Explore Commercials", "/industries"]}
         />
         <IndustryCards />
       </section>

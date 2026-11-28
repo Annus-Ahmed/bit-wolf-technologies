@@ -163,23 +163,23 @@ export function NetworkBackground() {
               0,
               point.x,
               point.y,
-              radius * 13,
+              radius * 6,
             );
-            glow.addColorStop(0, `rgba(${color.rgb}, ${pulse * 0.85})`);
-            glow.addColorStop(0.22, `rgba(${color.rgb}, ${pulse * 0.25})`);
+            glow.addColorStop(0, `rgba(${color.rgb}, ${pulse * 0.6})`);
+            glow.addColorStop(0.22, `rgba(${color.rgb}, ${pulse * 0.15})`);
             glow.addColorStop(1, `rgba(${color.rgb}, 0)`);
             ctx.fillStyle = glow;
             ctx.beginPath();
-            ctx.arc(point.x, point.y, radius * 13, 0, Math.PI * 2);
+            ctx.arc(point.x, point.y, radius * 6, 0, Math.PI * 2);
             ctx.fill();
-            ctx.fillStyle = color.core;
+            ctx.fillStyle = `${color.core}d9`;
           } else
-            ctx.fillStyle = `rgba(${color.rgb}, ${0.25 + point.glow * 0.5})`;
+            ctx.fillStyle = `rgba(${color.rgb}, ${0.22 + point.glow * 0.4})`;
           ctx.beginPath();
           ctx.arc(
             point.x,
             point.y,
-            point.glow > 0.91 ? radius * 1.5 : radius * 0.65,
+            point.glow > 0.91 ? radius * 1.2 : radius * 0.65,
             0,
             Math.PI * 2,
           );
@@ -202,10 +202,10 @@ export function NetworkBackground() {
         const tail = sampleStream(stream.route, progress - 0.6, points);
         const trail = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
         trail.addColorStop(0, `rgba(${color.rgb}, 0)`);
-        trail.addColorStop(0.6, `rgba(${color.rgb}, .55)`);
-        trail.addColorStop(1, color.core);
+        trail.addColorStop(0.6, `rgba(${color.rgb}, .45)`);
+        trail.addColorStop(1, `${color.core}cc`);
         ctx.strokeStyle = trail;
-        ctx.lineWidth = 1.25;
+        ctx.lineWidth = 1;
         ctx.beginPath();
         for (let step = 0; step <= 8; step++) {
           const point = sampleStream(
@@ -217,23 +217,23 @@ export function NetworkBackground() {
           else ctx.lineTo(point.x, point.y);
         }
         ctx.stroke();
-        const radius = 1.2 + Math.max(0, 1 - head.depth / 36) * 1.4;
+        const radius = 1 + Math.max(0, 1 - head.depth / 36) * 1.2;
         const halo = ctx.createRadialGradient(
           head.x,
           head.y,
           0,
           head.x,
           head.y,
-          radius * 9,
+          radius * 4.5,
         );
-        halo.addColorStop(0, `rgba(${color.rgb}, .8)`);
-        halo.addColorStop(0.22, `rgba(${color.rgb}, .3)`);
+        halo.addColorStop(0, `rgba(${color.rgb}, .5)`);
+        halo.addColorStop(0.22, `rgba(${color.rgb}, .15)`);
         halo.addColorStop(1, `rgba(${color.rgb}, 0)`);
         ctx.fillStyle = halo;
         ctx.beginPath();
-        ctx.arc(head.x, head.y, radius * 9, 0, Math.PI * 2);
+        ctx.arc(head.x, head.y, radius * 4.5, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = color.core;
+        ctx.fillStyle = `${color.core}d9`;
         ctx.beginPath();
         ctx.arc(head.x, head.y, radius, 0, Math.PI * 2);
         ctx.fill();
@@ -244,11 +244,11 @@ export function NetworkBackground() {
         const x = noise(i + 109) * width;
         const y =
           ((((noise(i + 417) - phase * 0.012) % 1) + 1) % 1) * height * 0.87;
-        const radius = 0.6 + noise(i + 823) * 1.6;
+        const radius = 0.6 + noise(i + 823) * 1.2;
         const color = DATA_LIGHTS[i % DATA_LIGHTS.length];
-        ctx.fillStyle = `rgba(${color.rgb}, ${0.15 + noise(i + 71) * 0.55})`;
+        ctx.fillStyle = `rgba(${color.rgb}, ${0.12 + noise(i + 71) * 0.4})`;
         ctx.shadowColor = `rgb(${color.rgb})`;
-        ctx.shadowBlur = i % 7 === 0 ? 12 : 0;
+        ctx.shadowBlur = i % 7 === 0 ? 2 : 0;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.fill();

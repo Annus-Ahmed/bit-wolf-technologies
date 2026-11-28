@@ -6,6 +6,7 @@ export default function Work() {
   return (
     <>
       <PageIntro
+        background="portfolio"
         eyebrow="OUR WORK"
         title="Ideas become possibilities."
         description="A growing space for our software projects, digital experiences, and the thinking behind them."

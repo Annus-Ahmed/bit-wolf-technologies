@@ -9,6 +9,7 @@ export default function About() {
   return (
     <>
       <PageIntro
+        background="about"
         eyebrow="MEET BIT-WOLF"
         title="People. Purpose. Possibility."
         description="A shared ambition to build technology with meaning. Get to know the thinking and the people behind BIT-WOLF Technologies."

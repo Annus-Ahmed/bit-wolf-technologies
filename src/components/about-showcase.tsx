@@ -56,7 +56,7 @@ const team = [
     ],
   },
   {
-    name: "Ali Nawaz",
+    name: "Ali Nawaz Khan",
     initials: "AN",
     role: "Marketing Manager",
     focus: "Connecting ideas with people.",
@@ -82,7 +82,7 @@ const team = [
     ],
   },
   {
-    name: "Zameer Khan",
+    name: "Muhammad Zameer",
     initials: "ZK",
     role: "Graphic Designer",
     focus: "Giving ideas a visual voice.",

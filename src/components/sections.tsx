@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { ContactGlobeHero } from "./contact-globe-hero";
 import { services, industries, process } from "@/data/site";
 import { Icon } from "./icon";
 import { Reveal } from "./motion";
@@ -91,13 +93,37 @@ export function PageIntro({
   eyebrow,
   title,
   description,
+  background,
 }: {
   eyebrow: string;
   title: string;
   description: string;
+  background?: "about" | "services" | "portfolio" | "commercials" | "contact";
 }) {
   return (
-    <section className="page-intro container">
+    <section
+      className={`page-intro container${background ? " page-intro--illustrated" : ""}`}
+    >
+      {background && (
+        <div
+          className={`page-intro-backdrop page-intro-backdrop--${background}`}
+          aria-hidden="true"
+        >
+          {background === "contact" ? (
+            <ContactGlobeHero />
+          ) : (
+            <Image
+              src={`/images/heroes/${background}.webp`}
+              alt=""
+              fill
+              sizes="100vw"
+              preload
+              className="page-intro-image"
+            />
+          )}
+          <div className="page-intro-shade" />
+        </div>
+      )}
       <span className="eyebrow">{eyebrow}</span>
       <h1>{title}</h1>
       <p>{description}</p>

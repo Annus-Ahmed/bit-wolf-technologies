@@ -10,6 +10,7 @@ export default function Services() {
   return (
     <>
       <PageIntro
+        background="services"
         eyebrow="OUR EXPERTISE"
         title="The right technology. Real possibilities."
         description="Five connected areas of expertise. One focused team helping you build, understand, connect, simplify, and scale."

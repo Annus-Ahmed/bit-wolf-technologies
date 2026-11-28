@@ -13,6 +13,7 @@ export default async function Contact({
   return (
     <>
       <PageIntro
+        background="contact"
         eyebrow="LET’S BUILD SOMETHING EXCEPTIONAL"
         title="Great things start with a conversation."
         description="Have a project in mind? Tell us about your idea, business challenge, or software requirements. We’d love to explore what’s possible together."
@@ -37,7 +38,7 @@ export default async function Contact({
             <p>Open to projects in Pakistan and internationally.</p>
           </div>
           <div className="contact-method">
-            <small>THE CO-FOUNDERS</small>
+            <small>THE FOUNDERS</small>
             <p>Umer Abbas & Annus Ahmed</p>
           </div>
           <a
