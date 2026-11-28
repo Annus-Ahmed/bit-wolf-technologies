@@ -4,6 +4,16 @@ import { useEffect, useRef } from "react";
 import { useMotionPreference } from "./motion";
 
 const BLUE = "0, 142, 255";
+const DATA_LIGHTS = [
+  { rgb: "36, 225, 240", core: "#c7ffff" },
+  { rgb: "45, 212, 191", core: "#bcfff0" },
+  { rgb: "255, 190, 88", core: "#fff1c7" },
+  { rgb: "36, 225, 240", core: "#c7ffff" },
+  { rgb: "255, 157, 65", core: "#ffe4ad" },
+  { rgb: "145, 163, 255", core: "#e4e8ff" },
+  { rgb: "45, 212, 191", core: "#bcfff0" },
+  { rgb: "215, 238, 255", core: "#ffffff" },
+];
 
 function noise(seed: number) {
   const value = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
@@ -11,7 +21,12 @@ function noise(seed: number) {
 }
 
 type NetworkPoint = { x: number; y: number; depth: number; glow: number };
-type DataStream = { route: number[]; offset: number; speed: number };
+type DataStream = {
+  route: number[];
+  offset: number;
+  speed: number;
+  color: (typeof DATA_LIGHTS)[number];
+};
 
 function createStreams(columns: number, rows: number): DataStream[] {
   return Array.from({ length: columns < 30 ? 34 : 62 }, (_, index) => {
@@ -33,6 +48,7 @@ function createStreams(columns: number, rows: number): DataStream[] {
       route,
       offset: noise(index + 750) * route.length,
       speed: 5.5 + noise(index + 860) * 4,
+      color: DATA_LIGHTS[index % DATA_LIGHTS.length],
     };
   });
 }
@@ -137,6 +153,8 @@ export function NetworkBackground() {
             ctx.stroke();
           }
           const radius = 0.65 + (1 - row / rows) * 1.05;
+          const color =
+            DATA_LIGHTS[Math.floor(noise(index + 941) * DATA_LIGHTS.length)];
           if (point.glow > 0.91) {
             const pulse = 0.72 + Math.sin(phase * 1.5 + index) * 0.22;
             const glow = ctx.createRadialGradient(
@@ -147,15 +165,16 @@ export function NetworkBackground() {
               point.y,
               radius * 13,
             );
-            glow.addColorStop(0, `rgba(${BLUE}, ${pulse * 0.85})`);
-            glow.addColorStop(0.22, `rgba(${BLUE}, ${pulse * 0.25})`);
-            glow.addColorStop(1, `rgba(${BLUE}, 0)`);
+            glow.addColorStop(0, `rgba(${color.rgb}, ${pulse * 0.85})`);
+            glow.addColorStop(0.22, `rgba(${color.rgb}, ${pulse * 0.25})`);
+            glow.addColorStop(1, `rgba(${color.rgb}, 0)`);
             ctx.fillStyle = glow;
             ctx.beginPath();
             ctx.arc(point.x, point.y, radius * 13, 0, Math.PI * 2);
             ctx.fill();
-            ctx.fillStyle = "#c9e7ff";
-          } else ctx.fillStyle = `rgba(${BLUE}, ${0.25 + point.glow * 0.5})`;
+            ctx.fillStyle = color.core;
+          } else
+            ctx.fillStyle = `rgba(${color.rgb}, ${0.25 + point.glow * 0.5})`;
           ctx.beginPath();
           ctx.arc(
             point.x,
@@ -170,6 +189,7 @@ export function NetworkBackground() {
 
       // Each packet follows existing mesh edges, with a short luminous trail.
       for (const stream of streams) {
+        const color = stream.color;
         const progress = phase * stream.speed + stream.offset;
         const head = sampleStream(stream.route, progress, points);
         if (
@@ -181,9 +201,9 @@ export function NetworkBackground() {
           continue;
         const tail = sampleStream(stream.route, progress - 0.6, points);
         const trail = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
-        trail.addColorStop(0, `rgba(${BLUE}, 0)`);
-        trail.addColorStop(0.6, `rgba(${BLUE}, .55)`);
-        trail.addColorStop(1, "rgba(185, 225, 255, .95)");
+        trail.addColorStop(0, `rgba(${color.rgb}, 0)`);
+        trail.addColorStop(0.6, `rgba(${color.rgb}, .55)`);
+        trail.addColorStop(1, color.core);
         ctx.strokeStyle = trail;
         ctx.lineWidth = 1.25;
         ctx.beginPath();
@@ -206,14 +226,14 @@ export function NetworkBackground() {
           head.y,
           radius * 9,
         );
-        halo.addColorStop(0, `rgba(${BLUE}, .8)`);
-        halo.addColorStop(0.22, `rgba(${BLUE}, .3)`);
-        halo.addColorStop(1, `rgba(${BLUE}, 0)`);
+        halo.addColorStop(0, `rgba(${color.rgb}, .8)`);
+        halo.addColorStop(0.22, `rgba(${color.rgb}, .3)`);
+        halo.addColorStop(1, `rgba(${color.rgb}, 0)`);
         ctx.fillStyle = halo;
         ctx.beginPath();
         ctx.arc(head.x, head.y, radius * 9, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = "#d5edff";
+        ctx.fillStyle = color.core;
         ctx.beginPath();
         ctx.arc(head.x, head.y, radius, 0, Math.PI * 2);
         ctx.fill();
@@ -225,8 +245,9 @@ export function NetworkBackground() {
         const y =
           ((((noise(i + 417) - phase * 0.012) % 1) + 1) % 1) * height * 0.87;
         const radius = 0.6 + noise(i + 823) * 1.6;
-        ctx.fillStyle = `rgba(${BLUE}, ${0.15 + noise(i + 71) * 0.55})`;
-        ctx.shadowColor = "#008EFF";
+        const color = DATA_LIGHTS[i % DATA_LIGHTS.length];
+        ctx.fillStyle = `rgba(${color.rgb}, ${0.15 + noise(i + 71) * 0.55})`;
+        ctx.shadowColor = `rgb(${color.rgb})`;
         ctx.shadowBlur = i % 7 === 0 ? 12 : 0;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -312,7 +333,7 @@ export function NetworkBackground() {
               cx={noise(index + 11) * 1440}
               cy={320 + noise(index + 27) * 430}
               r={1 + noise(index + 43) * 2.2}
-              fill="#008EFF"
+              fill={`rgb(${DATA_LIGHTS[index % DATA_LIGHTS.length].rgb})`}
             />
           ))}
         </g>
